@@ -17,7 +17,6 @@ const ROW_H = 56;
 const pad2 = (n) => String(n).padStart(2, "0");
 
 const HOUR_12 = Array.from({ length: 12 }, (_, i) => pad2(i + 1));
-const MIN_00 = ["00"]; 
 
 function toHour24(ampm, hh12) {
   const h = Number(hh12); 
@@ -40,7 +39,7 @@ export default function TimetablePage() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
-  const [term, setTerm] = useState("2025");
+  const term = ("2025");
   const [timetableName, setTimetableName] = useState("시간표 없음");
   const [subjects, setSubjects] = useState([]); 
   const [showAddModal, setShowAddModal] = useState(false);

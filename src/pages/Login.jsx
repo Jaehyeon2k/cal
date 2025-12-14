@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
@@ -21,7 +20,7 @@ export default function Login() {
 
   useEffect(() => {
     if (user) goAfter();
-  }, [user]);
+  }, [user, goAfter]);
 
   const onLogin = async (e) => {
     e.preventDefault();
