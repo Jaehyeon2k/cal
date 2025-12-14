@@ -1,0 +1,246 @@
+{
+  "events": [
+    {
+      "title": "123",
+      "start": "2025-12-13",
+      "end": "",
+      "scope": "USER",
+      "ownerEmail": "wmspfl2673@gmail.com",
+      "memo": "",
+      "color": "blue",
+      "id": 2
+    },
+    {
+      "title": "1234",
+      "start": "2025-12-13",
+      "end": "",
+      "scope": "USER",
+      "ownerEmail": "wmspfl2673@gmail.com",
+      "memo": "",
+      "color": "blue",
+      "id": 3
+    },
+    {
+      "title": "33333",
+      "start": "2025-12-13",
+      "end": "",
+      "scope": "USER",
+      "ownerEmail": "wmspfl2673@gmail.com",
+      "memo": "",
+      "color": "blue",
+      "id": 6
+    },
+    {
+      "title": "1",
+      "start": "2025-12-13",
+      "end": "",
+      "scope": "USER",
+      "ownerEmail": "wmspfl2673@gmail.com",
+      "memo": "",
+      "color": "red",
+      "id": 7
+    },
+    {
+      "title": "123",
+      "start": "2025-12-13",
+      "end": "",
+      "scope": "USER",
+      "ownerEmail": "test8@gmail.com",
+      "memo": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "color": "green",
+      "id": 8
+    },
+    {
+      "title": "123214213",
+      "start": "2025-12-19",
+      "end": "2025-12-27",
+      "scope": "USER",
+      "ownerEmail": "test8@gmail.com",
+      "memo": "",
+      "color": "red",
+      "id": 11
+    },
+    {
+      "title": "123123214213",
+      "start": "2025-12-26",
+      "end": "",
+      "scope": "USER",
+      "ownerEmail": "test8@gmail.com",
+      "memo": "",
+      "color": "blue",
+      "id": 14
+    },
+    {
+      "title": "123",
+      "start": "2025-12-13",
+      "end": "",
+      "scope": "USER",
+      "ownerEmail": "root@gmail.com",
+      "memo": "ddss",
+      "color": "red",
+      "id": 104
+    },
+    {
+      "id": 1001,
+      "title": "2학기 기말 프로젝트 발표",
+      "start": "2025-12-16",
+      "end": "2025-12-19",
+      "scope": "DEPT",
+      "deptId": "CS",
+      "memo": "",
+      "color": "blue",
+      "ownerEmail": "admin@yju.ac.kr"
+    },
+    {
+      "id": 2001,
+      "title": "드론 비행 실습 평가",
+      "start": "2025-12-09",
+      "end": "",
+      "scope": "DEPT",
+      "deptId": "AR",
+      "memo": "",
+      "color": "green",
+      "ownerEmail": "admin@yju.ac.kr"
+    },
+    {
+      "id": 2002,
+      "title": "항공안전 이론 시험",
+      "start": "2025-12-16",
+      "end": "",
+      "scope": "DEPT",
+      "deptId": "AR",
+      "memo": "",
+      "color": "green",
+      "ownerEmail": "admin@yju.ac.kr"
+    },
+    {
+      "id": 3001,
+      "title": "동물간호 실습 평가",
+      "start": "2025-12-11",
+      "end": "",
+      "scope": "DEPT",
+      "deptId": "AN",
+      "memo": "",
+      "color": "red",
+      "ownerEmail": "admin@yju.ac.kr"
+    },
+    {
+      "id": 3002,
+      "title": "반려동물 임상 세미나",
+      "start": "2025-12-19",
+      "end": "",
+      "scope": "DEPT",
+      "deptId": "AN",
+      "memo": "",
+      "color": "red",
+      "ownerEmail": "admin@yju.ac.kr"
+    },
+    {
+      "id": 4001,
+      "title": "졸업전시회 준비",
+      "start": "2025-12-02",
+      "end": "2025-12-06",
+      "scope": "DEPT",
+      "deptId": "DESIGN",
+      "memo": "",
+      "color": "purple",
+      "ownerEmail": "admin@yju.ac.kr"
+    },
+    {
+      "id": 4002,
+      "title": "졸업전시회",
+      "start": "2025-12-15",
+      "end": "2025-12-20",
+      "scope": "DEPT",
+      "deptId": "DESIGN",
+      "memo": "",
+      "color": "purple",
+      "ownerEmail": "admin@yju.ac.kr"
+    },
+    {
+      "id": 5001,
+      "title": "계열 공통 특강",
+      "start": "2025-12-13",
+      "end": "",
+      "scope": "DEPT",
+      "deptId": "ETC",
+      "memo": "",
+      "color": "orange",
+      "ownerEmail": "admin@yju.ac.kr"
+    },
+    {
+      "title": "방학 특강",
+      "start": "2025-12-16",
+      "end": "2025-12-22",
+      "scope": "DEPT",
+      "deptId": "CS",
+      "memo": "",
+      "color": "blue",
+      "ownerEmail": "root@gmail.com",
+      "id": 5002
+    },
+    {
+      "title": "ㄴㅇㅁㄴㅇㄹ",
+      "start": "2025-12-14",
+      "end": "",
+      "scope": "USER",
+      "ownerEmail": "root@gmail.com",
+      "memo": "",
+      "color": "blue",
+      "id": 5003
+    },
+    {
+      "title": "발표",
+      "start": "2025-12-15",
+      "end": "",
+      "scope": "USER",
+      "ownerEmail": "root@gmail.com",
+      "memo": "리액트 프로젝트 발표",
+      "color": "red",
+      "id": 5004
+    },
+    {
+      "title": "33",
+      "start": "2026-01-03",
+      "end": "",
+      "scope": "USER",
+      "ownerEmail": "root@gmail.com",
+      "memo": "",
+      "color": "blue",
+      "id": 5006
+    },
+    {
+      "title": "ㄴㅇ",
+      "start": "2025-12-14",
+      "end": "",
+      "allDay": true,
+      "scope": "USER",
+      "ownerEmail": "root@gmail.com",
+      "id": 5007,
+      "memo": "",
+      "color": "blue"
+    },
+    {
+      "title": "ㅁㄴㅇ",
+      "start": "2026-01-01",
+      "end": "2026-01-09",
+      "allDay": true,
+      "scope": "USER",
+      "ownerEmail": "root@gmail.com",
+      "id": 5008,
+      "memo": "",
+      "color": "green"
+    },
+    {
+      "title": "ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
+      "start": "2025-12-26",
+      "end": "2025-12-30",
+      "allDay": true,
+      "scope": "USER",
+      "ownerEmail": "root@gmail.com",
+      "id": 5009,
+      "memo": "ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㅁㅇㅁㄴㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
+      "color": "blue"
+    }
+  ]
+}

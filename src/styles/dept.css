@@ -1,0 +1,126 @@
+/* =========================================================
+   DeptSchedule (dept.css)
+   목표:
+   - 공통 UI(ui.css / theme.css / layout.css)를 "절대" 덮어쓰지 않기
+   - 학과일정 페이지(.dept-page) 안에서만 필요한 것만 추가
+   - 테이블은 공통 EventTable이 쓰므로, 충돌 최소 범위로 기본 스타일 제공
+========================================================= */
+
+/* -----------------------------------------
+  DeptSchedule: select (학과 선택)
+  - 공통 input 스타일을 따르되, 화살표/드롭다운만 보정
+----------------------------------------- */
+.dept-page .dept-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  min-width: 280px;
+  max-width: 520px;
+  width: min(520px, 92vw);
+
+  padding: 12px 44px 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text);
+  font-weight: 800;
+  cursor: pointer;
+
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 22px) 52%,
+    calc(100% - 16px) 52%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+
+  /* ✅ 다크/라이트 드롭다운 테마 힌트 */
+  color-scheme: light dark;
+}
+
+.dept-page .dept-select:hover {
+  filter: brightness(1.03);
+}
+
+.dept-page .dept-select:focus {
+  outline: none;
+  border-color: rgba(47, 109, 246, 0.6);
+  box-shadow: 0 0 0 3px rgba(47, 109, 246, 0.18);
+}
+
+/* ✅ 옵션(드롭다운) 배경이 하얗게 떠서 글씨 안보이는 문제 방지 */
+.dept-page .dept-select option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* -----------------------------------------
+  Table base (EventTable 공통)
+  - 전역 .table은 충돌 위험 → 카드 안에 있는 테이블만 기본 스타일 제공
+----------------------------------------- */
+.card .table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.card .table th,
+.card .table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.card .table th {
+  font-weight: 800;
+  opacity: 0.9;
+}
+
+/* -----------------------------------------
+  DeptSchedule table tweaks
+----------------------------------------- */
+
+/* 제목 컬럼: 긴 글씨 줄바꿈 허용 */
+.dept-page .table td:first-child {
+  white-space: normal;
+  word-break: keep-all;
+}
+
+/* 관리 버튼 줄 */
+.dept-page .row-actions {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap; /* 화면 좁을 때 버튼 줄바꿈 */
+}
+
+/* danger 버튼(삭제)만 dept에서 조금 더 또렷하게 */
+.dept-page .btn.danger {
+  border-color: rgba(255, 80, 80, 0.35);
+  color: rgba(255, 80, 80, 0.95);
+}
+
+/* -----------------------------------------
+  Spacing: 관리자일 때 카드 간격 보정
+  (CalendarFrame이 section-divider 넣고 bottom에 card들이 이어서 렌더됨)
+----------------------------------------- */
+.dept-page.is-admin .card + .card {
+  margin-top: 18px;
+}
+
+/* -----------------------------------------
+  Responsive
+----------------------------------------- */
+@media (max-width: 900px) {
+  .dept-page .dept-select {
+    width: 100%;
+    max-width: none;
+  }
+
+  .dept-page .row-actions {
+    gap: 6px;
+  }
+}
