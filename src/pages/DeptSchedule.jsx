@@ -162,7 +162,6 @@ export default function DeptSchedule() {
     <CalendarFrame
       className={`dept-page ${admin ? "is-admin" : "is-user"}`}
       title="학과 일정"
-      calendarTitle="학과 일정 캘린더"
       topRight={
         <select
           className="dept-select"

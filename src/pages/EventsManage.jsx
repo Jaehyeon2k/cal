@@ -210,7 +210,6 @@ export default function EventsManage() {
   return (
     <CalendarFrame
       title="내 일정 관리"
-      calendarTitle="내 일정 캘린더"
       bottom={
         <>
           {(loading || errMsg) && (

@@ -66,31 +66,22 @@
   word-break: keep-all;
 }
 
-/* 관리 버튼 줄 */
 .dept-page .row-actions {
   display: inline-flex;
   gap: 8px;
   align-items: center;
-  flex-wrap: wrap; /* 화면 좁을 때 버튼 줄바꿈 */
+  flex-wrap: wrap; 
 }
 
-/* danger 버튼(삭제)만 dept에서 조금 더 또렷하게 */
 .dept-page .btn.danger {
   border-color: rgba(255, 80, 80, 0.35);
   color: rgba(255, 80, 80, 0.95);
 }
 
-/* -----------------------------------------
-  Spacing: 관리자일 때 카드 간격 보정
-  (CalendarFrame이 section-divider 넣고 bottom에 card들이 이어서 렌더됨)
------------------------------------------ */
 .dept-page.is-admin .card + .card {
   margin-top: 18px;
 }
 
-/* -----------------------------------------
-  Responsive
------------------------------------------ */
 @media (max-width: 900px) {
   .dept-page .dept-select {
     width: 100%;

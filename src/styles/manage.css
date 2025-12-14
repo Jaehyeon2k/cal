@@ -189,7 +189,6 @@
   text-overflow: ellipsis;
 }
 
-/* 메모 미리보기도 말줄임 (지금은 숨겨놨지만 대비용) */
 .manage-table-wide .memo-preview{
   display: block;
   max-width: 100%;
@@ -200,7 +199,6 @@
   font-size: 12px;
 }
 
-/* 중요도 / 날짜 컬럼 흔들림 방지 */
 .manage-table-wide th:nth-child(2),
 .manage-table-wide td:nth-child(2){
   width: 90px;
@@ -213,7 +211,6 @@
   width: 120px;
 }
 
-/* 관리 버튼 컬럼 고정 */
 .manage-table-wide th:last-child,
 .manage-table-wide td:last-child{
   width: 190px;
