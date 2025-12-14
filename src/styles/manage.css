@@ -1,22 +1,9 @@
-/* =========================================================
-   EventsManage (내 일정 관리) - final
-   - 카드 간격(새 일정 추가 / 일정 목록) : manage-stack
-   - 테이블: 제목 칸 줄바꿈 + 메모 미리보기 말줄임
-   - 액션 버튼: 가로 고정
-   - 메모 모달 UI
-   - fc-clean: 라이트/다크 공통 버튼/오늘 표시
-========================================================= */
-
-/* ✅ 아래 섹션(폼 카드 / 목록 카드) 간격 */
 .manage-stack{
   display: grid;
   gap: 18px;
   margin-top: 14px;
 }
 
-/* -------------------------
-   테이블/행 UI
-------------------------- */
 .manage-hint{
   margin-top: 10px;
   font-size: 13px;
@@ -28,7 +15,6 @@
   word-break: keep-all;
 }
 
-/* 제목 + 메모 미리보기 */
 .title-cell .title-line{
   font-weight: 700;
 }
@@ -42,12 +28,10 @@
   text-overflow: ellipsis;
 }
 
-/* 모바일에서 메모 미리보기 너무 길면 줄이기 */
 @media (max-width: 640px){
   .memo-preview{ max-width: 240px; }
 }
 
-/* 중요도 뱃지(색상은 inline style로 들어오니까 틀만 잡기) */
 .importance-badge{
   display: inline-flex;
   align-items: center;
@@ -60,9 +44,6 @@
   white-space: nowrap;
 }
 
-/* -------------------------
-   액션 버튼 (수정/메모/삭제) 가로 정렬
-------------------------- */
 .row-actions{
   display: flex;
   flex-direction: row;
@@ -70,11 +51,10 @@
   justify-content: flex-end;
   gap: 8px;
 
-  flex-wrap: nowrap;     /* 줄바꿈 금지 */
-  white-space: nowrap;   /* 텍스트 줄바꿈 금지 */
+  flex-wrap: nowrap;   
+  white-space: nowrap;   
 }
 
-/* 버튼이 좁아도 찌그러지지 않게 */
 .row-actions .btn{
   display: inline-flex;
   align-items: center;
@@ -84,15 +64,11 @@
   padding: 6px 10px;
 }
 
-/* danger 버튼 보정 (기존 rgba 값 오류 수정) */
 .row-actions .btn.danger{
   border-color: rgba(255, 80, 80, 0.40);
   color: rgba(255, 80, 80, 0.95);
 }
 
-/* -------------------------
-   Memo Modal
-------------------------- */
 .memo-overlay{
   position: fixed;
   inset: 0;
@@ -167,9 +143,6 @@
   margin-top: 14px;
 }
 
-/* -------------------------
-   FullCalendar (fc-clean) - 라이트/다크 공통
-------------------------- */
 .fc-clean .fc .fc-button{
   border-radius: 12px !important;
   border: 1px solid var(--fc-button-border) !important;
@@ -198,23 +171,16 @@
   background: var(--fc-today-bg) !important;
   border-radius: 14px;
 }
-/* ===============================
-   내 일정 관리 - 리스트 고정 레이아웃
-=============================== */
-
-/* 테이블 전체 고정 레이아웃 */
 .manage-table-wide table{
-  table-layout: fixed;   /* ✅ 핵심 */
+  table-layout: fixed;
   width: 100%;
 }
 
-/* 제목 컬럼 폭 고정 */
 .manage-table-wide th:first-child,
 .manage-table-wide td:first-child{
-  width: 38%;            /* 필요하면 35~45% 조절 */
+  width: 38%;
 }
 
-/* 제목 텍스트: 한 줄 말줄임 */
 .manage-table-wide .title-line{
   display: block;
   max-width: 100%;

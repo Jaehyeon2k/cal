@@ -1,4 +1,3 @@
-/* Card / Form UI */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -82,7 +81,6 @@
   font-size: 0.92rem;
 }
 
-/* DeptSchedule UI helpers */
 .card-title {
   font-weight: 900;
   margin: 0 0 12px;

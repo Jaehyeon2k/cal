@@ -1,17 +1,6 @@
-// src/pages/TimetablePage.jsx
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "../auth/AuthContext";
 import { useTheme } from "../theme/ThemeContext";
-
-/**
- * 요구사항 반영:
- * - 시간 선택: 1시간 단위 / 00분 고정 / 01~12 전체 표시 (오전/오후 + 12시간제)
- * - 그리드 줄 안맞는 문제: day column padding-top 제거 + block top 계산 보정
- * - 페이지 배경/헤더 배경 미묘한 차이 완화: 페이지 자체는 투명(부모 배경 사용), 카드가 기준
- *
- * ✅ 리팩토링:
- * - inline CSS 제거 → src/styles/timetable.css 로 분리 (index.css에서 로드)
- */
 
 const DAYS = [
   { ko: "월", key: "Mon", date: "12/8" },
@@ -21,20 +10,17 @@ const DAYS = [
   { ko: "금", key: "Fri", date: "12/12" },
 ];
 
-// 표시는 8~19로 유지(네 스샷 기준)
 const START_HOUR_24 = 8;
-const END_HOUR_24 = 19; // inclusive
+const END_HOUR_24 = 19;
 const ROW_H = 56;
 
 const pad2 = (n) => String(n).padStart(2, "0");
 
-// 12시간 표시(01~12)
 const HOUR_12 = Array.from({ length: 12 }, (_, i) => pad2(i + 1));
-// 분은 00 고정만
-const MIN_00 = ["00"]; // (요구사항상 00 고정, 유지용)
+const MIN_00 = ["00"]; 
 
 function toHour24(ampm, hh12) {
-  const h = Number(hh12); // 1..12
+  const h = Number(hh12); 
   if (ampm === "오전") return h === 12 ? 0 : h;
   return h === 12 ? 12 : h + 12;
 }
@@ -54,10 +40,9 @@ export default function TimetablePage() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
-  // === state ===
   const [term, setTerm] = useState("2025");
   const [timetableName, setTimetableName] = useState("시간표 없음");
-  const [subjects, setSubjects] = useState([]); // {id, name, prof, room, day, startHour24, endHour24}
+  const [subjects, setSubjects] = useState([]); 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showManageModal, setShowManageModal] = useState(false);
 
@@ -74,7 +59,6 @@ export default function TimetablePage() {
     endMin: "00",
   });
 
-  // ===== localStorage =====
   const LS_KEY = useMemo(
     () => `yju_tt_${user?.uid || "guest"}_${term}`,
     [user?.uid, term]
@@ -88,7 +72,6 @@ export default function TimetablePage() {
       if (parsed?.timetableName) setTimetableName(parsed.timetableName);
       if (Array.isArray(parsed?.subjects)) setSubjects(parsed.subjects);
     } catch {
-      // ignore
     }
   }, [LS_KEY]);
 
@@ -99,11 +82,9 @@ export default function TimetablePage() {
         JSON.stringify({ timetableName, subjects }, null, 2)
       );
     } catch {
-      // ignore
     }
   }, [LS_KEY, timetableName, subjects]);
 
-  // ===== derived =====
   const hourRows = useMemo(() => {
     const arr = [];
     for (let h = START_HOUR_24; h <= END_HOUR_24; h++) arr.push(h);
@@ -118,7 +99,6 @@ export default function TimetablePage() {
 
   const gridRef = useRef(null);
 
-  // ===== actions =====
   const closeAll = () => {
     setShowAddModal(false);
     setShowManageModal(false);
@@ -134,10 +114,8 @@ export default function TimetablePage() {
     let startHour24 = sh;
     let endHour24 = eh;
 
-    // 같은 시각/역전 방지
     if (endHour24 <= startHour24) endHour24 = startHour24 + 1;
 
-    // 표시 그리드 범위로 클램프
     startHour24 = clamp(startHour24, START_HOUR_24, END_HOUR_24);
     endHour24 = clamp(endHour24, START_HOUR_24 + 1, END_HOUR_24 + 1);
 
@@ -176,7 +154,6 @@ export default function TimetablePage() {
     setShowManageModal(false);
   };
 
-  // ===== render helpers =====
   const blocksByDay = useMemo(() => {
     const map = Array.from({ length: DAYS.length }, () => []);
     for (const s of subjects) {
@@ -188,8 +165,8 @@ export default function TimetablePage() {
   }, [subjects, dayToIndex]);
 
   const calcBlockStyle = (s) => {
-    const rowIndex = s.startHour24 - START_HOUR_24; // 0-based
-    const top = rowIndex * ROW_H; // ✅ +10 제거(이미 padding-top 제거됨)
+    const rowIndex = s.startHour24 - START_HOUR_24;
+    const top = rowIndex * ROW_H; 
     const height = Math.max(1, (s.endHour24 - s.startHour24) * ROW_H);
 
     return { top, height };
@@ -228,7 +205,6 @@ export default function TimetablePage() {
           </div>
 
           <div className="tt-grid">
-            {/* head */}
             <div className="tt-grid-head">
               <div className="tt-spacer" />
               <div className="tt-days-head">
@@ -242,7 +218,6 @@ export default function TimetablePage() {
               </div>
             </div>
 
-            {/* body */}
             <div className="tt-grid-body" ref={gridRef}>
               <div className="tt-time-col">
                 {hourRows.map((h) => (
@@ -255,12 +230,10 @@ export default function TimetablePage() {
               <div className="tt-days">
                 {DAYS.map((d, di) => (
                   <div key={d.key} className="tt-day-col">
-                    {/* cells */}
                     {hourRows.map((h) => (
                       <div key={`${d.key}-${h}`} className="tt-cell" />
                     ))}
 
-                    {/* blocks */}
                     {blocksByDay[di].map((s) => (
                       <div
                         key={s.id}
@@ -336,7 +309,6 @@ export default function TimetablePage() {
                   <option>금</option>
                 </select>
 
-                {/* 시작시간 */}
                 <div className="tt-timebox">
                   <select
                     className="tt-time-select tt-ampm"
@@ -366,7 +338,6 @@ export default function TimetablePage() {
                   <span className="tt-fixed">:00</span>
                 </div>
 
-                {/* 종료시간 */}
                 <div className="tt-timebox">
                   <select
                     className="tt-time-select tt-ampm"
@@ -425,7 +396,6 @@ export default function TimetablePage() {
         </div>
       )}
 
-      {/* ===== 과목 관리 모달 ===== */}
       {showManageModal && (
         <div className="tt-backdrop" onMouseDown={closeAll}>
           <div className="tt-modal" onMouseDown={(e) => e.stopPropagation()}>

@@ -24,7 +24,6 @@ function toDateInputValue(d) {
   return `${y}-${m}-${day}`;
 }
 
-// ✅ 색상 옵션(저장값: red/blue/green)
 const COLOR_OPTIONS = [
   { key: "red",   label: "중요", bg: "#ef4444", border: "#dc2626", text: "#ffffff" },
   { key: "blue",  label: "보통", bg: "#3b82f6", border: "#2563eb", text: "#ffffff" },
@@ -43,13 +42,11 @@ export default function EventsManage() {
   const [loading, setLoading] = useState(false);
   const [errMsg, setErrMsg] = useState("");
 
-  // form state
   const [editId, setEditId] = useState(null);
   const [title, setTitle] = useState("");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
 
-  // memo modal state
   const [memoModal, setMemoModal] = useState(null);
 
   const loadMyEvents = useCallback(async () => {
@@ -60,7 +57,6 @@ export default function EventsManage() {
     try {
       const data = await fetchEvents();
 
-      // ✅ 내 일정만 필터링
       const onlyMine = (Array.isArray(data) ? data : []).filter(
         (ev) => ev.scope === "USER" && ev.ownerEmail === email
       );
@@ -174,7 +170,6 @@ export default function EventsManage() {
     }
   }, [memoModal, loadMyEvents]);
 
-  // FullCalendar 이벤트 변환
   const fcEvents = useMemo(() => {
     return (myEvents || []).map((ev) => {
       const c = getColorStyle(ev.color || "blue");
@@ -192,7 +187,6 @@ export default function EventsManage() {
     });
   }, [myEvents]);
 
-  // 캘린더 클릭 → 메모 모달 열기
   const onCalendarClick = useCallback(
     (info) => {
       const row = info?.event?.extendedProps;
@@ -202,7 +196,6 @@ export default function EventsManage() {
     [onOpenMemo]
   );
 
-  // 테이블 columns (EventTable이 th만 쓰고 실제 row는 renderRow가 그려줌)
   const columns = useMemo(
     () => [
       { label: "제목" },
@@ -226,7 +219,6 @@ export default function EventsManage() {
             </p>
           )}
 
-          {/* ✅ 섹션 간격 확보 */}
           <div className="manage-stack">
             <ScheduleFormCard
               editId={editId}

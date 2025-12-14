@@ -1,10 +1,3 @@
-// src/components/FormGrid.jsx
-import React from "react";
-
-/**
- * 재활용 폼 그리드 (제목/시작/끝 + 버튼)
- * ✅ allDay(종일) 완전 제거 버전 (코드/UX 단순화)
- */
 export default function FormGrid({
   titleLabel = "제목",
   titlePlaceholder = "예) 팀플 발표, 과제 마감",
@@ -64,7 +57,6 @@ export default function FormGrid({
         </div>
 
         <div className="dept-form-actions">
-          {/* 레이아웃 유지용 */}
           <span />
 
           <button className="btn btn-primary" type="submit">

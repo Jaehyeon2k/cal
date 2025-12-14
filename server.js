@@ -1,5 +1,3 @@
-// server.cjs
-/* eslint-disable no-console */
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
@@ -12,7 +10,6 @@ const ROOT = process.cwd();
 const BUILD_DIR = path.join(ROOT, "build");
 const DB_PATH = path.join(ROOT, "db.json");
 
-// -------------------- utils --------------------
 function exists(p) {
     try { fs.accessSync(p, fs.constants.F_OK); return true; } catch { return false; }
 }
@@ -73,7 +70,6 @@ async function readBodyJson(req) {
     catch { return "__INVALID_JSON__"; }
 }
 
-// -------------------- db helpers --------------------
 function ensureDbShape(db) {
     if (!db || typeof db !== "object") db = {};
     if (!Array.isArray(db.timetables)) db.timetables = [];
@@ -107,9 +103,8 @@ function nextId(arr) {
 }
 
 function matchQuery(item, searchParams) {
-    // json-server처럼 ?field=value 단순 필터 지원
     for (const [k, v] of searchParams.entries()) {
-        if (k.startsWith("_")) continue; // _sort/_order/_limit 등은 여기서 무시
+        if (k.startsWith("_")) continue;
         if (String(item?.[k]) !== String(v)) return false;
     }
     return true;
@@ -135,14 +130,12 @@ function applySortLimit(list, searchParams) {
 }
 
 function parseIdFromPath(p, base) {
-    // base: "/timetables" or "/subjects"
-    const rest = p.slice(base.length); // "" or "/123"
+    const rest = p.slice(base.length);
     if (!rest || rest === "/") return null;
     const m = rest.match(/^\/(\d+)(?:\/)?$/);
     return m ? Number(m[1]) : NaN;
 }
 
-// -------------------- API server (4000) --------------------
 const apiServer = http.createServer(async (req, res) => {
     try {
         // CORS preflight
@@ -158,14 +151,12 @@ const apiServer = http.createServer(async (req, res) => {
         const url = new URL(req.url, `http://127.0.0.1:${API_PORT}`);
         const p = url.pathname;
 
-        // health
         if (p === "/" || p === "/health") {
             return sendJson(res, 200, { ok: true, apiPort: API_PORT, db: path.basename(DB_PATH) });
         }
 
         const db = readDb();
 
-        // collections
         const collections = [
             { name: "timetables", base: "/timetables" },
             { name: "subjects", base: "/subjects" },
@@ -177,21 +168,18 @@ const apiServer = http.createServer(async (req, res) => {
         const list = db[col.name];
         const id = parseIdFromPath(p, col.base);
 
-        // GET collection
         if (req.method === "GET" && (id === null)) {
             const filtered = list.filter(it => matchQuery(it, url.searchParams));
             const out = applySortLimit(filtered, url.searchParams);
             return sendJson(res, 200, out);
         }
 
-        // GET item
         if (req.method === "GET" && Number.isFinite(id)) {
             const found = list.find(it => Number(it.id) === id);
             if (!found) return sendJson(res, 404, { error: "Not Found", id });
             return sendJson(res, 200, found);
         }
 
-        // POST create
         if (req.method === "POST" && (id === null)) {
             const body = await readBodyJson(req);
             if (body === "__INVALID_JSON__") return sendJson(res, 400, { error: "Invalid JSON" });
@@ -202,20 +190,18 @@ const apiServer = http.createServer(async (req, res) => {
             return sendJson(res, 201, item);
         }
 
-        // PUT replace
         if (req.method === "PUT" && Number.isFinite(id)) {
             const body = await readBodyJson(req);
             if (body === "__INVALID_JSON__") return sendJson(res, 400, { error: "Invalid JSON" });
             const idx = list.findIndex(it => Number(it.id) === id);
             if (idx < 0) return sendJson(res, 404, { error: "Not Found", id });
             const next = (body && typeof body === "object") ? body : {};
-            next.id = id; // id 고정
+            next.id = id;
             list[idx] = next;
             writeDb(db);
             return sendJson(res, 200, next);
         }
 
-        // PATCH merge
         if (req.method === "PATCH" && Number.isFinite(id)) {
             const body = await readBodyJson(req);
             if (body === "__INVALID_JSON__") return sendJson(res, 400, { error: "Invalid JSON" });
@@ -228,7 +214,6 @@ const apiServer = http.createServer(async (req, res) => {
             return sendJson(res, 200, merged);
         }
 
-        // DELETE
         if (req.method === "DELETE" && Number.isFinite(id)) {
             const idx = list.findIndex(it => Number(it.id) === id);
             if (idx < 0) return sendJson(res, 404, { error: "Not Found", id });
@@ -244,7 +229,6 @@ const apiServer = http.createServer(async (req, res) => {
     }
 });
 
-// -------------------- Front server (3000) --------------------
 const frontServer = http.createServer(async (req, res) => {
     try {
         if (!exists(BUILD_DIR)) {
@@ -258,19 +242,15 @@ const frontServer = http.createServer(async (req, res) => {
         const url = new URL(req.url, `http://127.0.0.1:${FRONT_PORT}`);
         let p = decodeURIComponent(url.pathname);
 
-        // 보안: path traversal 방지
         p = p.replace(/\\/g, "/");
         if (p.includes("..")) return sendText(res, 400, "Bad Request");
 
-        // 정적 파일 후보
         let filePath = path.join(BUILD_DIR, p);
 
-        // 디렉토리면 index.html
         if (exists(filePath) && fs.statSync(filePath).isDirectory()) {
             filePath = path.join(filePath, "index.html");
         }
 
-        // 파일 존재하면 그대로 반환
         if (exists(filePath) && fs.statSync(filePath).isFile()) {
             const ext = path.extname(filePath).toLowerCase();
             const buf = await readFileSafe(filePath);
@@ -281,7 +261,6 @@ const frontServer = http.createServer(async (req, res) => {
             }, buf);
         }
 
-        // SPA fallback: GET 요청이면서 확장자 없는 라우트면 index.html
         const isGet = req.method === "GET";
         const hasExt = path.extname(p) !== "";
         if (isGet && !hasExt) {
@@ -301,7 +280,6 @@ const frontServer = http.createServer(async (req, res) => {
     }
 });
 
-// -------------------- start --------------------
 frontServer.listen(FRONT_PORT, "127.0.0.1", () => {
     console.log(`[front] http://127.0.0.1:${FRONT_PORT}`);
     console.log(`[front] serving: ${BUILD_DIR}`);

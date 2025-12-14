@@ -1,4 +1,3 @@
-// src/pages/Signup.jsx
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../lib/firebase";
@@ -23,7 +22,6 @@ export default function Signup() {
 
       const displayName = name.trim() || email.split("@")[0];
 
-      // firebase 표시명
       if (displayName) {
         await updateProfile(cred.user, { displayName });
       }

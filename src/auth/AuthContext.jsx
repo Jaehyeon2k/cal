@@ -29,7 +29,6 @@ export default function AuthProvider({ children }) {
 
   const logout = () => signOut(auth);
 
-  // ✅ 핵심: 프로필 갱신 후, Context user 상태를 강제로 업데이트
   const refreshUser = async () => {
     if (!auth.currentUser) return;
     await auth.currentUser.reload();

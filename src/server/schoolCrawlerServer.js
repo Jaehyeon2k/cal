@@ -6,7 +6,7 @@ const dayjs = require("dayjs");
 
 const YJU_YEAR_SCHDUL_URL = "https://www.yju.ac.kr/schdulmanage/kr/3/yearSchdul.do"; 
 
-const REQUEST_METHOD = "POST"; // "GET" 또는 "POST"
+const REQUEST_METHOD = "POST";
 
 const PORT = 4100;
 
@@ -41,7 +41,7 @@ function parseYearScheduleHtmlToEvents(html, targetYear) {
   if (!root.length) return events;
 
   root.find("ul > li").each((_, li) => {
-    const monthText = $(li).find("h3").first().text().trim(); // "1월"
+    const monthText = $(li).find("h3").first().text().trim();
     const monthMatch = monthText.match(/(\d{1,2})\s*월/);
     if (!monthMatch) return;
 
@@ -50,13 +50,13 @@ function parseYearScheduleHtmlToEvents(html, targetYear) {
     const dts = $(li).find("dl > dt");
     dts.each((idx, dt) => {
       const dtText = $(dt).find("span").text().replace(/\s+/g, " ").trim();
-      const dateMatches = dtText.match(/\b(\d{2})-(\d{2})\b/g); // ["01-28","01-30"] or ["01-01"]
+      const dateMatches = dtText.match(/\b(\d{2})-(\d{2})\b/g);
       if (!dateMatches || dateMatches.length < 1) return;
 
-      const startMMDD = dateMatches[0]; // "01-28"
+      const startMMDD = dateMatches[0];
       const endMMDD = dateMatches.length >= 2 ? dateMatches[1] : null;
 
-      const startDay = startMMDD.split("-")[1]; // "28"
+      const startDay = startMMDD.split("-")[1];
       const start = `${targetYear}-${month}-${startDay}`;
 
       let end = null;
@@ -74,7 +74,7 @@ function parseYearScheduleHtmlToEvents(html, targetYear) {
         id,
         title,
         start,
-        end,         // null 또는 YYYY-MM-DD (exclusive)
+        end,
         allDay: true,
         scope: "SCHOOL",
       });

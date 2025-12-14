@@ -1,4 +1,3 @@
-import React from "react";
 import FormGrid from "./FormGrid";
 
 export default function ScheduleFormCard({
