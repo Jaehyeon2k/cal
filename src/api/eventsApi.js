@@ -1,7 +1,5 @@
-// src/api/eventsApi.js
 import axios from "axios";
 
-// json-server 주소 (4000)
 const api = axios.create({
   baseURL: "http://localhost:4000",
 });
@@ -25,7 +23,6 @@ export async function deleteEvent(id) {
   await api.delete(`/events/${id}`);
 }
 
-// 학교 일정(SCOPE = 'SCHOOL')만
 export async function fetchSchoolEvents() {
   const res = await api.get("/events", {
     params: { scope: "SCHOOL" },
@@ -33,7 +30,6 @@ export async function fetchSchoolEvents() {
   return res.data;
 }
 
-// ✅ 개인 일정(SCOPE='MY' + owner=uid)만
 export async function fetchMyEvents(owner) {
   const res = await api.get("/events", {
     params: {

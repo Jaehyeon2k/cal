@@ -27,7 +27,7 @@
     "start": "concurrently \"npm run serve:api\" \"npm run serve:school\" \"npm run start:app\"",
     "start:app": "react-scripts start",
     "serve:school": "node src/server/schoolCrawlerServer.js",
-    "serve:api": "json-server --watch db.json --port 4000 --delay 300",
+    "serve:api": "json-server --watch db.json --port 4000 --host 0.0.0.0",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

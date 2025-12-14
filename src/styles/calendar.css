@@ -67,14 +67,12 @@
   padding: 8px 14px !important;
 }
 
-/* 캘린더 타이틀 */
 .fc .fc-toolbar-title {
   font-weight: 900;
   letter-spacing: -0.2px;
   color: var(--text) !important;
 }
 
-/* (선택) 월 뷰에서 “셀 배경”을 아주 약하게 */
 .fc .fc-daygrid-day-frame {
   border-radius: 14px;
 }

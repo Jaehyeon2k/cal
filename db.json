@@ -241,6 +241,36 @@
       "id": 5009,
       "memo": "ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㅁㅇㅁㄴㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
       "color": "blue"
+    },
+    {
+      "title": "ㅁㄴㅇㄹㄴㅁㅇㄹ",
+      "start": "2025-12-14",
+      "end": "",
+      "allDay": true,
+      "scope": "USER",
+      "ownerEmail": "testtest@gmail.com",
+      "id": 5010
+    }
+  ],
+  "timetables": [
+    {
+      "ownerUid": "hV8flCzzOZcS1DJEBLzdtlJiYn72",
+      "ownerEmail": "testtest@gmail.com",
+      "term": "2025",
+      "name": "시간표 없음",
+      "subjects": [
+        {
+          "id": 1765694888447,
+          "name": "asdf",
+          "prof": "",
+          "room": "",
+          "day": "월",
+          "startHour24": 9,
+          "endHour24": 10
+        }
+      ],
+      "id": 1,
+      "updatedAt": "2025-12-14T06:48:08.476Z"
     }
   ]
 }
